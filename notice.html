@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Stargazer Sky Map</title>
+        <link rel="stylesheet" href="stars.css">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Mono&display=swap"
+            rel="stylesheet">
+    </head>
+    <body>
+        <div id="starfield"></div>
+
+        <div class="top-controls">
+            <div class="search-box">
+                <input type="text" id="locationSearch" placeholder="Search city...">
+                <button onclick="searchLocation()">Search</button>
+                <button onclick="getCurrentLocation()" class="gps-btn">📍 GPS</button>
+                <button
+                    onclick="resetPan()"
+                    class="gps-btn"
+                    style="background: #ffb74d; color: black;">
+                    Center</button>
+            </div>
+            <div class="coord-display">
+                Lat:
+                <input type="number" id="latitude" step="0.0001" value="40.7128">
+                Lng:
+                <input type="number" id="longitude" step="0.0001" value="-74.0060">
+            </div>
+        </div>
+
+        <div class="info-panel" id="ephemerisPanel">
+            <h3 style="margin:0 0 10px 0; color:#ffd700;">Celestial Info</h3>
+            <p>🕒
+                <span id="simTimeDisplay"></span></p>
+            <p>🌖 Moon:
+                <span id="moonPhase"></span></p>
+            <p>☀️ Sun:
+                <span id="sunStatus"></span></p>
+        </div>
+
+        <div class="time-machine" id="timeMachinePanel">
+            <label for="timeSlider">Time Machine:
+                <span id="timeOffsetDisplay">Live</span></label>
+            <input
+                type="date"
+                id="simDate"
+                style="width: 100%; margin-bottom: 10px; padding: 5px; background: rgba(0,0,0,0.5); color: white; border: 1px solid #4fc3f7; border-radius: 5px;">
+            <input type="range" id="timeSlider" min="-24" max="24" step="0.1" value="0">
+            <button
+                onclick="document.getElementById('timeSlider').value=0; document.getElementById('simDate').value=''; updateTimeDisplay();">Reset to Now</button>
+        </div>
+
+        <div class="canvas-container">
+            <canvas id="skyCanvas"></canvas>
+        </div>
+
+        <div id="tooltip" class="tooltip"></div>
+
+        <nav class="bottom-bar">
+            <button class="toggle-btn active" id="btn-stars" onclick="toggleLayer('stars')">✨ Stars</button>
+            <button
+                class="toggle-btn active"
+                id="btn-planets"
+                onclick="toggleLayer('planets')">🪐 Planets</button>
+            <button
+                class="toggle-btn active"
+                id="btn-constellations"
+                onclick="toggleLayer('constellations')">🌌 Constellations</button>
+            <button class="toggle-btn" id="btn-grid" onclick="toggleLayer('grid')">🌐 Grid</button>
+            <div style="width: 2px; background: rgba(255,255,255,0.2); margin: 0 5px;"></div>
+            <button class="toggle-btn" id="btn-time-toggle" onclick="toggleTimeMachine()">⏳ Time Machine</button>
+        </nav>
+
+        <script src="script.js"></script>
+    </body>
+</html>

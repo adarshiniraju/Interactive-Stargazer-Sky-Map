@@ -1,0 +1,214 @@
+body {
+    overflow: hidden;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: "Trebuchet MS", sans-serif;
+    background: #000000;
+    color: #ffffff;
+}
+
+#starfield {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.top-controls {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 15, 30, 0.6);
+    backdrop-filter: blur(12px);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(79, 195, 247, 0.3);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-box input {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    width: 200px;
+}
+.search-box button {
+    padding: 8px 15px;
+    background: #4fc3f7;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.coord-display {
+    color: #4fc3f7;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+}
+.coord-display input {
+    width: 70px;
+    background: transparent;
+    color: white;
+    border: 1px solid #4fc3f7;
+    border-radius: 3px;
+    margin: 0 5px;
+}
+
+.canvas-container {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+#skyCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+.info-panel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(10, 15, 30, 0.6);
+    backdrop-filter: blur(12px);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(79, 195, 247, 0.3);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+}
+
+.bottom-bar {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 15, 30, 0.8);
+    backdrop-filter: blur(12px);
+    padding: 10px 20px;
+    border-radius: 30px;
+    display: flex;
+    gap: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 30;
+}
+
+.toggle-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: #aaa;
+    border: 1px solid transparent;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    transition: all 0.3s;
+}
+
+.toggle-btn:hover {
+    background: rgba(79, 195, 247, 0.1);
+    color: white;
+    transform: translateY(-2px);
+}
+.toggle-btn.active {
+    background: rgba(79, 195, 247, 0.2);
+    color: #4fc3f7;
+    border-color: #4fc3f7;
+    box-shadow: 0 0 15px rgba(79, 195, 247, 0.4);
+}
+
+/* TIME MACHINE SLIDE ANIMATION */
+.time-machine {
+    position: absolute;
+    bottom: 85px;
+    left: 50%;
+    background: rgba(10, 15, 30, 0.9);
+    padding: 15px 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(79, 195, 247, 0.3);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 300px;
+    z-index: 20;
+
+    /* Animation settings */
+    transform: translate(-50%, 200%);
+    /* Start hidden below the screen */
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+}
+
+.time-machine.visible {
+    transform: translate(-50%, 0);
+    /* Slide up */
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.time-machine input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+}
+.time-machine button {
+    background: transparent;
+    border: 1px solid #4fc3f7;
+    color: #4fc3f7;
+    padding: 5px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.time-machine button:hover {
+    background: #4fc3f7;
+    color: #000;
+}
+
+.tooltip {
+    position: absolute;
+    background: rgba(5, 10, 20, 0.85);
+    backdrop-filter: blur(8px);
+    border-left: 3px solid #ffd700;
+    padding: 10px 15px;
+    border-radius: 4px;
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 100;
+    transform: translate(-50%, -120%);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.tooltip-title {
+    color: #ffd700;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+.tooltip-body {
+    margin-top: 8px;
+    font-size: 12px;
+    max-width: 250px;
+    line-height: 1.4;
+    color: #ccc;
+}
+/* Custom Cursors for Dragging */
+#skyCanvas {
+    cursor: grab;
+}
+
+#skyCanvas:active {
+    cursor: grabbing;
+}
